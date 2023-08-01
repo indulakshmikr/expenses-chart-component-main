@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title> Expenses chart component</title>
+
+</head>
+<body>
+  <header>
+    <div>
+      <h4>My balance</h4>
+      <h2>$921.48</h2>
+    </div>
+    <div><img src="./images/logo.svg" alt="logo"></div>
+  </header>
+<main>
+
+  <canvas id="myChart" width="400" height="200"></canvas>
+  <hr>
+  </main>
+  <footer>
+    <div class="total">
+      <h5>Total this month</h5>
+      <h1>$478.33</h1>
+      </div>
+    <div class="change">
+      <h5>+2.4%</h5>
+    <h6>from last month</h6>  
+    </div>
+  </footer>
+  <script>
+    // Fetch data from the JSON file
+    fetch('./data.json')
+      .then(response => response.json()) // Parse the response as JSON
+      .then(jsonData => {
+        const chartData = jsonData.map(item => item.amount);  // Extract the data from the JSON
+
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const currentDayIndex = new Date().getDay();
+    const currentDay = daysOfWeek[currentDayIndex];
+
+        // Find the maximum value in the chart data
+        const maxVal = Math.max(...chartData);
+
+        // Get the canvas element and create the chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: jsonData.map(item => item.day), // Use "day" data for the labels
+            datasets: [{
+              label: '$',
+              data: chartData,
+              backgroundColor: jsonData.map(item => (item.day.toUpperCase() === currentDay.toUpperCase()) ? 'hsla(10, 79%, 65%,0.8)' :  'hsl(10, 79%, 65%)'),
+              borderWidth: 0,
+              borderRadius: 5
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                grid: {
+                  display: false // Hide x-axis gridlines
+                }
+              },
+              y: {
+                display: false,
+                grid: {
+                  display: false // Hide x-axis gridlines
+                },
+                suggestedMin: 0, // Set the minimum value of the y-axis
+                suggestedMax: maxVal + 5, // Set the maximum value of the y-axis (add some padding)
+                grid: {
+                  color: 'transparent', // Hide y-axis gridlines by making them transparent
+                  drawBorder: false, // Hide the axis line
+                }
+              }
+            },
+            plugins: {
+                  legend: {
+                     display: false}}
+          },
+            plugins: {
+              tooltip: {
+                enabled: true,
+                  usePointStyle: true,
+                callbacks: {
+                  label: function (context) {
+                    const value = context.parsed.y;
+                    return '$' + value.toFixed(2); // Add the dollar sign and round the value to 2 decimal places
+                  },
+                  title: function (context) {
+                    return ''; // Hide the tooltip title (day label)
+                  }
+                }
+              }
+            }
+        });
+
+        //mark current day different color
+        const currentDate = new Date();
+
+        // Mark the maximum value with a different color
+        const maxDataIndex = chartData.indexOf(maxVal);
+        myChart.data.datasets[0].backgroundColor = myChart.data.datasets[0].data.map((val, index) => { if(index === maxDataIndex) return 'hsl(186, 34%, 60%)'});
+        myChart.update();
+      })
+      .catch(error => {
+        console.error('Error fetching or parsing JSON data:', error);
+      });
+  </script>
+
+</main>
+
+</body>
+</html>

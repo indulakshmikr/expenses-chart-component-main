@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap');
+
+:root {
+    --SoftRed: hsl(10, 79%, 65%);
+    --Cyan: hsl(186, 34%, 60%);
+    --Darkbrown: hsl(25, 47%, 15%);
+    --Mediumbrown: hsl(28, 10%, 53%);
+    --Cream: hsl(27, 66%, 92%);
+    --Verypaleorange: hsl(33, 100%, 98%);
+    --textFont:'DM Sans', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--Cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: var(--textFont);
+}
+
+header{
+    background-color: var(--SoftRed);
+    width:350px;
+    border-radius:.5rem;
+    padding:2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h4{
+    color: var(--Verypaleorange);
+}
+
+h2{
+    color:var(--Cream)
+}
+
+canvas{
+    cursor: pointer;
+}
+
+main{
+    background-color: var(--Verypaleorange);
+    width:350px;
+    padding: 0 1rem;
+    margin-top:1rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+hr{
+    border: 1px solid var(--Cream);
+}
+
+.change{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--Verypaleorange);
+    width:350px;
+    padding: 2rem 1rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.total{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+footer h1,h2, h3, h4, h5, h6{
+    margin: 0;
+}
+
+footer h1, h5{
+    color: var(--Darkbrown);
+}
