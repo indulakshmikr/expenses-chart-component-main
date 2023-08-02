@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   <link rel="stylesheet" href="./styles.css">
@@ -10,6 +12,7 @@
   <title> Expenses chart component</title>
 
 </head>
+
 <body>
   <header>
     <div>
@@ -18,19 +21,19 @@
     </div>
     <div><img src="./images/logo.svg" alt="logo"></div>
   </header>
-<main>
-
-  <canvas id="myChart" width="400" height="200"></canvas>
-  <hr>
+  <main>
+<h1> Spending -  Last 7 Days</h1>
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <hr>
   </main>
   <footer>
     <div class="total">
       <h5>Total this month</h5>
       <h1>$478.33</h1>
-      </div>
+    </div>
     <div class="change">
-      <h5>+2.4%</h5>
-    <h6>from last month</h6>  
+      <h4>+2.4%</h4>
+      <h6>from last month</h6>
     </div>
   </footer>
   <script>
@@ -41,8 +44,8 @@
         const chartData = jsonData.map(item => item.amount);  // Extract the data from the JSON
 
         const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const currentDayIndex = new Date().getDay();
-    const currentDay = daysOfWeek[currentDayIndex];
+        const currentDayIndex = new Date().getDay();
+        const currentDay = daysOfWeek[currentDayIndex];
 
         // Find the maximum value in the chart data
         const maxVal = Math.max(...chartData);
@@ -56,7 +59,7 @@
             datasets: [{
               label: '$',
               data: chartData,
-              backgroundColor: jsonData.map(item => (item.day.toUpperCase() === currentDay.toUpperCase()) ? 'hsla(10, 79%, 65%,0.8)' :  'hsl(10, 79%, 65%)'),
+              backgroundColor: jsonData.map(item => (item.day.toUpperCase() === currentDay.toUpperCase()) ? 'hsla(10, 79%, 65%,0.8)' : 'hsl(10, 79%, 65%)'),
               borderWidth: 0,
               borderRadius: 5
             }]
@@ -69,7 +72,7 @@
                 }
               },
               y: {
-                display: false,
+                display: false, //hide data on y axis
                 grid: {
                   display: false // Hide x-axis gridlines
                 },
@@ -82,24 +85,31 @@
               }
             },
             plugins: {
-                  legend: {
-                     display: false}}
-          },
-            plugins: {
+              legend: {
+                display: false // hide legend displayed above chart
+              },
               tooltip: {
-                enabled: true,
-                  usePointStyle: true,
-                callbacks: {
-                  label: function (context) {
-                    const value = context.parsed.y;
-                    return '$' + value.toFixed(2); // Add the dollar sign and round the value to 2 decimal places
-                  },
-                  title: function (context) {
-                    return ''; // Hide the tooltip title (day label)
-                  }
+              enabled: true,
+              displayColors: false, //hide color box
+              backgroundColor: 'hsl(25, 47%, 15%)',
+              bodyColor: 'hsl(33, 100%, 98%)',
+              bodyAlign: 'center',
+              bodyFont: {
+                weight: 'bold'
+              },
+              callbacks: {
+                label: function (context) {
+                  // return context.parsed.x;
+                  const value = context.parsed.y;
+                  return '$' + value.toFixed(2); // Add the dollar sign and round the value to 2 decimal places
+                },
+                title: function (context) {
+                  return ''; // Hide the tooltip title (day label)
                 }
               }
             }
+            }
+          },
         });
 
         //mark current day different color
@@ -107,7 +117,7 @@
 
         // Mark the maximum value with a different color
         const maxDataIndex = chartData.indexOf(maxVal);
-        myChart.data.datasets[0].backgroundColor = myChart.data.datasets[0].data.map((val, index) => { if(index === maxDataIndex) return 'hsl(186, 34%, 60%)'});
+        myChart.data.datasets[0].backgroundColor = myChart.data.datasets[0].data.map((val, index) => { if (index === maxDataIndex) return 'hsl(186, 34%, 60%)' });
         myChart.update();
       })
       .catch(error => {
@@ -115,7 +125,8 @@
       });
   </script>
 
-</main>
+  </main>
 
 </body>
+
 </html>

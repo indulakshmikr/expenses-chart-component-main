@@ -32,10 +32,19 @@ header{
 
 header h4{
     color: var(--Verypaleorange);
+    margin-top:0
 }
 
 h2{
-    color:var(--Cream)
+    color:var(--Verypaleorange);
+    font-size: 25px;
+    margin-top:0.5rem;
+    margin-bottom: 0;
+}
+
+h1{
+    color: var(--Darkbrown);
+    font-size: 25px;
 }
 
 canvas{
@@ -80,10 +89,28 @@ footer{
     flex-direction: column;
 }
 
-footer h1,h2, h3, h4, h5, h6{
+footer h1, h4, footer h5, footer h6{
     margin: 0;
 }
 
-footer h1, h5{
+footer h1, h4{
     color: var(--Darkbrown);
+}
+
+footer h5, h6{
+    color: var(--Mediumbrown);
+}
+
+@media screen {
+    header{
+        width: 90%;
+    }
+    
+    main{
+        width: 90%;
+    }
+    
+    footer{
+        width:90%
+    }
 }
