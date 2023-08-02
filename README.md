@@ -31,8 +31,8 @@ Users should be able to:
 
 ### Links
 
-🔗 Solution URL: https://github.com/indulakshmikr/expenses-chart-component-main/
-🔗 Live Site URL: https://indulakshmikr.github.io/expenses-chart-component-main/
+🔗 Solution URL: https://github.com/indulakshmikr/expenses-chart-component-main/ <br />
+🔗 Live Site URL: https://indulakshmikr.github.io/expenses-chart-component-main/ <br />
 
 ## My process
 
@@ -45,8 +45,8 @@ Users should be able to:
 
 ### What I learned 
 
-✨ Adding Chart.js to HTML
-✨ Customising the chart such as hiding legend, backgroundColor of bars , hoverBackgroundColor 
+✨ Adding Chart.js to HTML <br />
+✨ Customising the chart such as hiding legend, backgroundColor of bars , hoverBackgroundColor <br />
 
 ### Continued development
 
