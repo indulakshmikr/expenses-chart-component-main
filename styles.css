@@ -101,7 +101,7 @@ footer h5, h6{
     color: var(--Mediumbrown);
 }
 
-@media screen {
+@media screen and (max-width:400px){
     header{
         width: 90%;
     }
